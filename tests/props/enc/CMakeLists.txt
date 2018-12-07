@@ -2,14 +2,13 @@
 # Licensed under the MIT License.
 
 include(oeedl_file)
-include(target_make_enclave)
+include(add_enclave)
 
 
 oeedl_file(../props.edl enclave gen)
 
-add_library(props_enc_unsigned SHARED enc.c props.c ${gen})
-add_library(props_enc SHARED enc.c props.c ${gen})
-target_make_enclave(props_enc sign.conf)
+add_enclave(TARGET props_enc CONFIG sign.conf SOURCES enc.c props.c ${gen})
+add_enclave(TARGET props_enc_unsigned SOURCES enc.c props.c ${gen})
 
 target_include_directories(props_enc PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 target_include_directories(props_enc_unsigned PRIVATE ${CMAKE_CURRENT_BINARY_DIR})

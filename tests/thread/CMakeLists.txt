@@ -9,7 +9,7 @@ if (UNIX)
 endif()
 
 add_enclave_test(tests/oethread 
-    ./host thread_host ./oethread_enc oethread_enc)
+    thread_host oethread_enc)
 
 add_enclave_test(tests/pthread 
-    ./host thread_host ./pthread_enc pthread_enc)
+    thread_host pthread_enc)
