@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
      may require compiling with the `-std=c++11` option when building with GCC.
 - Update minimum required CMake version for building from source to 3.13.1.
 - Update minimum required C++ standard for building from source to C++14.
+- Renamed C++ library from `liboelibcxx_cxx.a` to `liboelibcxx.a`.
 
 ### Deprecated
 
