@@ -2,7 +2,8 @@
 # Licensed under the MIT License.
 
 
-add_executable(pthread_enc
+add_enclave(TARGET pthread_enc
+    SOURCES
     enc.cpp
     cond_tests.cpp
     rwlock_tests.cpp)
