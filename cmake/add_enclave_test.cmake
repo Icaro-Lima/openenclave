@@ -47,7 +47,9 @@ if (ADD_WINDOWS_ENCLAVE_TESTS)
         # However, on windows currently testing is done with the Linux build of the enclave.
         # This hack can be removed when CMake on Windows produces ELF enclaves
 	if(${TEST_ENC_FILE} MATCHES '_signed')
-           set(TEST_ENC_FILE, ${TEST_ENC_FILE}.so)
+           message(STATUS, "in _signed")
+           string(REGEX REPLACE '_signed' '.signed.so' TEST_ENC_FILE ${TEST_ENC_FILE})
+           message(STATUS, "file name is ${TEST_ENC_FILE}")
         endif()
 
 	# custom rule to copy binary from linux
