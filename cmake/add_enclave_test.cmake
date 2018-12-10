@@ -17,11 +17,11 @@
 
 function(add_enclave_test TEST_NAME HOST_FILE ENC_FILE)
 
-   set(options)
-   set(oneValueArgs ENCSUBPATH)
-   set(multiValueArgs PARAMS)
-   cmake_parse_arguments(TEST "${options}" "${oneValueArgs}"
-                          "${multiValueArgs}" ${ARGN})
+   #set(options)
+   #set(oneValueArgs ENCSUBPATH)
+   #set(multiValueArgs PARAMS)
+   #cmake_parse_arguments(TEST "${options}" "${oneValueArgs}"
+   #                       "${multiValueArgs}" ${ARGN})
 
 
 if (ADD_WINDOWS_ENCLAVE_TESTS)
@@ -69,7 +69,7 @@ if (ADD_WINDOWS_ENCLAVE_TESTS)
 	add_test(${TEST_NAME} COMMAND $<TARGET_FILE:${HOST_FILE}> ${CMAKE_CURRENT_BINARY_DIR}/${HOST_SUBPATH}/${TEST_ENC_FILE} ${ARGN})
 
 elseif (UNIX)
-     add_test(NAME ${TEST_NAME} COMMAND $<TARGET_FILE:${HOST_FILE}> $<TARGET_FILE:${ENC_FILE}> ${TEST_PARAMS})
+        add_test(NAME ${TEST_NAME} COMMAND $<TARGET_FILE:${HOST_FILE}> $<TARGET_FILE:${ENC_FILE}> ${ARGN})
 endif()
 
 endfunction(add_enclave_test)

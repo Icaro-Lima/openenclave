@@ -4,12 +4,11 @@
 add_subdirectory(host)
 
 if (UNIX)
-	add_subdirectory(oethread_enc)
-	add_subdirectory(pthread_enc)
+	add_subdirectory(enc)
 endif()
 
 add_enclave_test(tests/oethread 
-    thread_host oethread_enc ENCSUBPATH oethread_enc)
+    thread_host oethread_enc)
 
 add_enclave_test(tests/pthread 
-    thread_host pthread_enc ENCSUBPATH pthread_enc)
+    thread_host pthread_enc)
