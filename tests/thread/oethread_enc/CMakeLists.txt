@@ -2,8 +2,7 @@
 # Licensed under the MIT License.
 
 
-add_enclave( TARGET oethread_enc
-    SOURCES
+add_executable(oethread_enc
     enc.cpp
     cond_tests.cpp
     rwlock_tests.cpp)
