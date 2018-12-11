@@ -12,7 +12,7 @@
 #include <cstring>
 #include <thread>
 #include <vector>
-#include "../../../host/enclave.h"
+#include "../../../host/sgx/enclave.h"
 #include "../args.h"
 
 static TestMutexArgs _args;

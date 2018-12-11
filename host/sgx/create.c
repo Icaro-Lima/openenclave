@@ -50,7 +50,7 @@ static const char* get_fullpath(const char* path)
 #include <string.h>
 #include "cpuid.h"
 #include "enclave.h"
-#include "memalign.h"
+#include "../memalign.h"
 #include "sgxload.h"
 
 static oe_once_type _enclave_init_once;
