@@ -43,6 +43,7 @@ if (ADD_WINDOWS_ENCLAVE_TESTS)
         # Ideally, the name of the enclave is found by $<TARGET_FILE:${ENC_FILE}>
         # However, on windows, testing is done with the Linux build of the enclave.
         # This hack can be removed when CMake on Windows produces ELF enclaves
+        set(TEST_ENCFILE ${ENC_FILE})
 	if(ENC_FILE MATCHES ".*_signed")
            string(REGEX REPLACE "_signed" ".signed.so" TEST_ENCFILE ${ENC_FILE})
         endif()
