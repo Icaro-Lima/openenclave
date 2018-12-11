@@ -30,34 +30,30 @@ if (ADD_WINDOWS_ENCLAVE_TESTS)
 	# make complete path.
 	get_filename_component(TEST_DIR ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
-        set(TEST_ENC_FILE ${ENC_FILE})
 
         # (HACK1)Ideally, the path to the enclave should be $<TARGET_FILE:${ENC_FILE}>
         # However, windows, the Linux build of the enclave is used for testing.
         # Instead of passing in "enc" as the subpath,
-        # we are using enc as the default subpath and only changing it if ENCSUBPATH is 
-        # passed in as an argument.
+        # we are using enc as the default enclave subpath  
+        # and host as the default host subpath.
         # This hack can be removed when CMake on Windows produces ELF enclaves.
-        if(NOT TEST_ENCSUBPATH)
-           set(TEST_ENCSUBPATH enc)
-        endif()
+        set(TEST_ENCSUBPATH enc)
+        set(TEST_HOSTSUBPATH host)
 
         # (HACK2)This is a hack to figure out the target name for the linux enclave
         # Ideally, the name of the enclave is found by $<TARGET_FILE:${ENC_FILE}>
         # However, on windows currently testing is done with the Linux build of the enclave.
         # This hack can be removed when CMake on Windows produces ELF enclaves
-	if(${TEST_ENC_FILE} MATCHES '_signed')
-           message(STATUS, "in _signed")
-           string(REGEX REPLACE '_signed' '.signed.so' TEST_ENC_FILE ${TEST_ENC_FILE})
-           message(STATUS, "file name is ${TEST_ENC_FILE}")
+	if(ENC_FILE MATCHES ".*_signed")
+           string(REGEX REPLACE "_signed" ".signed.so" TEST_ENCFILE ${ENC_FILE})
         endif()
 
 	# custom rule to copy binary from linux
 	# take a dependency on host binary to make sure it exists in addition to 
 	# enc binary in linux
 	add_custom_command(OUTPUT ${TEST_NAME}_windows_include
-		COMMAND ${CMAKE_COMMAND} -E copy ${LINUX_BIN_DIR}/${TEST_DIR}/${TEST_ENCSUBPATH}/${TEST_ENC_FILE} ${CMAKE_CURRENT_BINARY_DIR}/${HOST_SUBPATH}/${TEST_ENC_FILE}
-		DEPENDS $<TARGET_FILE:${HOST_FILE}> ${LINUX_BIN_DIR}/${TEST_DIR}/${TEST_ENCSUBPATH}/${TEST_ENC_FILE}
+		COMMAND ${CMAKE_COMMAND} -E copy ${LINUX_BIN_DIR}/${TEST_DIR}/${TEST_ENCSUBPATH}/${TEST_ENCFILE} ${CMAKE_CURRENT_BINARY_DIR}/${TEST_HOSTSUBPATH}/${TEST_ENCFILE}
+		DEPENDS $<TARGET_FILE:${HOST_FILE}> ${LINUX_BIN_DIR}/${TEST_DIR}/${TEST_ENCSUBPATH}/${TEST_ENCFILE}
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		)
 
@@ -68,10 +64,16 @@ if (ADD_WINDOWS_ENCLAVE_TESTS)
 		DEPENDS ${TEST_NAME}_windows_include
 		)
 
-	add_test(${TEST_NAME} COMMAND $<TARGET_FILE:${HOST_FILE}> ${CMAKE_CURRENT_BINARY_DIR}/${HOST_SUBPATH}/${TEST_ENC_FILE} ${ARGN})
+	add_test(${TEST_NAME} COMMAND $<TARGET_FILE:${HOST_FILE}> ${CMAKE_CURRENT_BINARY_DIR}/${TEST_HOSTSUBPATH}/${TEST_ENC_FILE} ${ARGN})
 
 elseif (UNIX)
         add_test(NAME ${TEST_NAME} COMMAND $<TARGET_FILE:${HOST_FILE}> $<TARGET_FILE:${ENC_FILE}> ${ARGN})
+#        set(TEST_ENC_FILE ${ENC_FILE})
+# if(TEST_ENC_FILE MATCHES ".*_signed")
+#           message(ERROR "Radhika in _signed")
+#           string(REGEX REPLACE "_signed" ".signed.so" OUT_TEST_ENC_FILE ${TEST_ENC_FILE})
+#           message(STATUS "file name is ${OUT_TEST_ENC_FILE}")
+#        endif()
 endif()
 
 endfunction(add_enclave_test)
