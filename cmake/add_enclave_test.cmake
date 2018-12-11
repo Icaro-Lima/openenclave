@@ -32,17 +32,16 @@ if (ADD_WINDOWS_ENCLAVE_TESTS)
 
 
         # (HACK1)Ideally, the path to the enclave should be $<TARGET_FILE:${ENC_FILE}>
-        # However, windows, the Linux build of the enclave is used for testing.
+        # However, for windows, the Linux build of the enclave is used for testing.
         # Instead of passing in "enc" as the subpath,
         # we are using enc as the default enclave subpath  
         # and host as the default host subpath.
         # This hack can be removed when CMake on Windows produces ELF enclaves.
         set(TEST_ENCSUBPATH enc)
         set(TEST_HOSTSUBPATH host)
-
         # (HACK2)This is a hack to figure out the target name for the linux enclave
         # Ideally, the name of the enclave is found by $<TARGET_FILE:${ENC_FILE}>
-        # However, on windows currently testing is done with the Linux build of the enclave.
+        # However, on windows, testing is done with the Linux build of the enclave.
         # This hack can be removed when CMake on Windows produces ELF enclaves
 	if(ENC_FILE MATCHES ".*_signed")
            string(REGEX REPLACE "_signed" ".signed.so" TEST_ENCFILE ${ENC_FILE})
