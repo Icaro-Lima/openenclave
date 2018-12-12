@@ -5,7 +5,7 @@
 #
 # Usage:
 #
-#	add_enclave(<target> <SOURCES sources> <C)
+#	add_enclave(<TARGET target> <SOURCES sources> <CONFIG config>)
 #
 # The target must already exist and should be a shared object (an
 # enclave).
