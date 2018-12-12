@@ -4,9 +4,7 @@
 
 ## This function is to add test for given host file and enclave file.
 ## TEST_NAME	: test name for add test.
-## HOST_SUBPATH : Path of host file directory.
 ## HOST_FILE	: Host application executable file name.
-## ENC_SUBPATH	: Path of enclave file directory.
 ## ENC_FILE		: Signed/UnSigned enclave file name.
 ## DESCRIPTION : For ADD_WINDOWS_ENCLAVE_TESTS enabled function will copy signed 
 ##			enclave file from Linux build location to windows build location 
@@ -16,13 +14,6 @@
 ##			directly to add_test.
 
 function(add_enclave_test TEST_NAME HOST_FILE ENC_FILE)
-
-   #set(options)
-   #set(oneValueArgs ENCSUBPATH)
-   #set(multiValueArgs PARAMS)
-   #cmake_parse_arguments(TEST "${options}" "${oneValueArgs}"
-   #                       "${multiValueArgs}" ${ARGN})
-
 
 if (ADD_WINDOWS_ENCLAVE_TESTS)
 
@@ -68,12 +59,6 @@ if (ADD_WINDOWS_ENCLAVE_TESTS)
 
 elseif (UNIX)
         add_test(NAME ${TEST_NAME} COMMAND $<TARGET_FILE:${HOST_FILE}> $<TARGET_FILE:${ENC_FILE}> ${ARGN})
-#        set(TEST_ENC_FILE ${ENC_FILE})
-# if(TEST_ENC_FILE MATCHES ".*_signed")
-#           message(ERROR "Radhika in _signed")
-#           string(REGEX REPLACE "_signed" ".signed.so" OUT_TEST_ENC_FILE ${TEST_ENC_FILE})
-#           message(STATUS "file name is ${OUT_TEST_ENC_FILE}")
-#        endif()
 endif()
 
 endfunction(add_enclave_test)
