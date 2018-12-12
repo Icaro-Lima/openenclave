@@ -3,7 +3,6 @@
 
 include(oeedl_file)
 
-
 oeedl_file(../tests.edl enclave gen)
 add_executable(report_enc enc.cpp datetime.cpp ${gen})
 

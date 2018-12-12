@@ -3,7 +3,6 @@
 
 include(oeedl_file)
 
-
 oeedl_file(../file.edl enclave gen)
 add_executable(file_enc
     enc.cpp

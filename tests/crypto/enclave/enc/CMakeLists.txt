@@ -3,7 +3,6 @@
 
 include(oeedl_file)
 
-
 oeedl_file(../crypto.edl enclave gen)
 
 add_executable(cryptoenc

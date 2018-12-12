@@ -1,8 +1,6 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
-
-
 add_executable(backtrace_enc enc.cpp)
 
 if(USE_DEBUG_MALLOC)

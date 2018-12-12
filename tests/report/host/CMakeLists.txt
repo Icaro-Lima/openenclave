@@ -3,7 +3,6 @@
 
 include(oeedl_file)
 
-
 oeedl_file(../tests.edl host gen)
 add_executable(report_host host.cpp tcbinfo.cpp ${gen})
 

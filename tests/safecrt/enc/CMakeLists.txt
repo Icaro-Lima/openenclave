@@ -3,7 +3,6 @@
 
 include(oeedl_file)
 
-
 oeedl_file(../safecrt.edl enclave gen)
 
 add_executable(safecrt_enc

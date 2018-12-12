@@ -3,7 +3,6 @@
 
 include(oeedl_file)
 
-
 oeedl_file(../tests.edl host gen)
 add_executable(qeidentity_host host.cpp qeidentifyinfo.cpp ${gen})
 

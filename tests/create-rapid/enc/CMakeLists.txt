@@ -3,7 +3,6 @@
 
 include(oeedl_file)
 
-
 oeedl_file(../create_rapid.edl enclave gen)
 
 add_executable(create_rapid_enc enc.cpp ${gen})

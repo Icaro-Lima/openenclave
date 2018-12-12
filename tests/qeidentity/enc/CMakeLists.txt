@@ -3,7 +3,6 @@
 
 include(oeedl_file)
 
-
 oeedl_file(../tests.edl enclave gen)
 add_executable(qeidentity_enc enc.cpp ${gen})
 

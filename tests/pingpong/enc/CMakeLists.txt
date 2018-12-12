@@ -3,7 +3,6 @@
 
 include(oeedl_file)
 
-
 oeedl_file(../pingpong.edl enclave gen)
 add_executable(pingpong_enc
     enc.cpp

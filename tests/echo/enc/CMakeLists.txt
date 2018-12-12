@@ -3,7 +3,6 @@
 
 include(oeedl_file)
 
-
 oeedl_file(../echo.edl enclave gen)
 
 add_executable(echo_enc enc.c ${gen})

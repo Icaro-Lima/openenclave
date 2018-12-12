@@ -3,7 +3,6 @@
 
 include(oeedl_file)
 
-
 oeedl_file(../hexdump.edl enclave gen)
 
 add_executable(hexdump_enc enc.c ${gen})
