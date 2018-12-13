@@ -1,7 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#ifdef OE_BUILD_ENCLAVE
+#include <openenclave/internal/enclavelibc.h>
+#endif
 #include <openenclave/internal/report.h>
+#include <openenclave/internal/tests.h>
+#include "../common/tests.h"
 
 #ifdef OE_BUILD_ENCLAVE
 
@@ -12,8 +17,6 @@
 #define GetReport oe_get_report
 
 #define VerifyReport oe_verify_report
-
-#define TEST_FCN OE_ECALL
 
 #else
 
@@ -52,8 +55,6 @@ oe_result_t VerifyReport(
     // Local attestation requires enclave.
     return oe_verify_report(g_enclave, report, report_size, parsed_report);
 }
-
-#define TEST_FCN
 
 #endif
 
